@@ -1,208 +1,35 @@
 <!DOCTYPE html>
-<!--  Sadman Hossain -->
-<html> 
-    <head> 
-        <title> Robot Builder </title>
-		<style> 
-		h1
-			 {
-			     color : blue;
-			     text-align : center;
-			 }
-		h3
-			 {
-				 color : #6A6767;
-				 text-align : center;
-			 }	 
-		h4	
-			 {
-				 color : red;
-				 text-align : center;
-			 }
-		h6
-			{
-				text-align : center;
-				cursor : pointer;
-			}
-		h5
-			{
-				text-align : center;
-			}
-		</style>
-		<script> 
-		function powerup()
-			{
-				pwr = pwr + 1;
-			}
-		function powerdown()
-			{
-				if (pwr <= 0)
-				    {	
-					pwr = 0;
-				    }
-				else
-					{
-					pwr = pwr - 1;
-					}
-			}
-		function velocityup()
-			{
-				speed = speed + 1;
-			}
-		function velocitydown()
-			{
-				if (speed <= 0)
-					{
-					speed = 0;
-					}
-				else
-					{
-					speed = speed - 1;
-					}
-			}
-		function accelerationup()
-			{
-				deltaspeed = deltaspeed + 1;
-		
-			}
-		function accelerationdown()
-			{
-				if (deltaspeed <= 0)
-					{
-					deltaspeed = 0;
-					}
-				else
-					{
-					deltaspeed = deltaspeed - 1;
-					}
-			}
-		function shieldtoggle ()
-			{		
-				if (shieldoff == shieldDiv.innerHTML)
-					{
-						shieldDiv.innerHTML = shieldon;
-						shieldDiv.style.color = "green";
-					}
-				else if (shieldon == shieldDiv.innerHTML)
-					{
-						shieldDiv.innerHTML = shieldoff;
-						shieldDiv.style.color = "red";
-					}
-			}
-		function createVariables()
-			{
-             		pwr = 0;
-					speed = 0;
-					deltaspeed = 0;
-		
-			}
-		function coalactive()
-			{
-				fuelDiv.innerHTML = " Fuel type:Coal ";
-			}
-		function gasolineactive ()
-			{
-				fuelDiv.innerHTML = " Fuel type:Gasoline ";
-			}
-		function dieselactive ()
-			{
-				fuelDiv.innerHTML = " Fuel type:Diesel ";
-			}
-		function naturalgasactive ()
-			{
-				fuelDiv.innerHTML = " Fuel type:Natural gas ";
-			}
-		function initialize()
-			{
-			 createVariables();
-			 powerDiv = document.getElementById("power");
-			 veloDiv = document.getElementById("velo");
-			 accelDiv = document.getElementById("accel");
-			 shieldDiv = document.getElementById("sg");
-			 fuelDiv = document.getElementById("string");
-			 shieldon = "Shield Generator:On";
-			 shieldoff = shieldDiv.innerHTML = "Shield Generator:Off";
-			 Cstar = document.getElementById("star");
-			}
-		function display()
-			 {
-				powerDiv.innerHTML = pwr + " Watts ";
-				veloDiv.innerHTML = speed + " m/s ";
-				accelDiv.innerHTML = deltaspeed + " m/s^2 ";
-			 }
-		function displayimg(newimage)
-			 {
-				Cstar.src = newimage;
-			 }
-		</script>
-    </head> 
-    <body onload = "initialize();"> 
-		<h1>
-			ROBOT BUILDER
-			</h1>
-		<h3>	
-		<button onclick="powerup();display();">
-			Add Power
-			</button>
-		<button onclick="powerdown();display();">
-			Reduce Power
-			</button>
-		<div Id ="power">
-			     0 Watts
-			 </div>
-		<button onclick="velocityup();display();">
-			Increase Velocity
-			</button>
-		<button onclick="velocitydown();display();">
-			Decrease Velocity
-			</button>
-		<div Id ="velo">
-			 0 m/s
-			</div>
-		<button onclick="accelerationup();display();">
-			Increase Acceleration
-			</button>
-		<button onclick="accelerationdown();display();">
-			Decrease Acceleration
-			</button>
-		<div Id ="accel">
-				0 m/s^2
-			</div>
-			</h3>
-		<h4>
-		<button onclick="shieldtoggle();">
-				Turn On/Off
-			</button>
-		<div Id ="sg">
-				Shield Generator:Off
-			</div>
-			</h4>
-		<h3>	
-		<button onclick="coalactive();">
-				Coal
-			</button>
-		<button onclick="gasolineactive();">
-				Gasoline
-			</button>
-		<button onclick="dieselactive();">
-				Diesel
-			</button>
-		<button onclick="naturalgasactive();">
-				Natural Gas
-			</button>
-		<div Id ="string">
-				Fuel type:
-			</div>
-			</h3>
-		<h6>
-			<img onclick ="displayimg('r2d2.jpg');" src ="r2d2.jpg" />
-			<img onclick ="displayimg('monstercat.png');" src ="monstercat.png" />
-			<img onclick ="displayimg('wallee.jpg');" src ="wallee.jpg" />
-			<img onclick ="displayimg('robo.jpg');" src ="robo.jpg" />
-			</h6>
-		<h5>
-				<img Id ="star" src ="" />
-			</h5> 
-		
-    </body>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('/w3images/forestbridge.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    Logo
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">COMING SOON</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">35 days left</p>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </div>
+</div>
+
+</body>
 </html>
