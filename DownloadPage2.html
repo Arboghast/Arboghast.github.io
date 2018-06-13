@@ -1,0 +1,19 @@
+<html>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+        gapi.auth2.authorize({
+  client_id: '342850676381-2kcnojm83o3upsqqg8s51u0mpdv2udmk.apps.googleusercontent.com',
+  scope: 'email profile openid',
+  response_type: 'id_token permission'
+}, function(response) {
+  if (response.error) {
+    // An error happened!
+    return;
+  }
+  // The user authorized the application for the scopes requested.
+  var accessToken = response.access_token;
+  var idToken = response.id_token;
+  // You can also now use gapi.client to perform authenticated requests.
+});
+    </script>
+</html>
