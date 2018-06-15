@@ -116,10 +116,11 @@
             }
         });
       }
-      var allVids = true;
+     
+      function makeApiCallVideos(index){
+        var allVids = true;
         var nextPageToken = '';
         var loop = 0;
-      function makeApiCallVideos(index){
         
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
@@ -151,7 +152,7 @@
               }
 
           });
-          console.log(allvids);
+          console.log(allVids);
        if(allVids)
        {
          console.log("loop");
