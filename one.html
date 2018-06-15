@@ -22,9 +22,13 @@
     <title>Youtube Playlist Downloader</title>
     <meta charset='utf-8' />
   </head>
+  <style>
+  
+  
+  </style>
   <body>
-    <p>Youtube Playlist Downloader</p>
-
+    <h1><center>Youtube Playlist Downloader</center></h1>
+    <p> Please Login in with your Google Account to continue</p>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize-button" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
     <button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button>
@@ -140,8 +144,6 @@
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 var nextPageToken = resp.result.nextPageToken;
-                var loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.result.pageInfo.resultsPerPage));
-                loop--;
                 makeApiCallVideo2(index,nextPageToken);
               }
           });
