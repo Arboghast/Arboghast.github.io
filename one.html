@@ -23,15 +23,15 @@
     <meta charset='utf-8' />
   </head>
   <style>
-  
+  .center{ }
   
   </style>
   <body>
-    <h1><center>Youtube Playlist Downloader</center></h1>
-    <p id = "message" style = "display: none;"> Please Login in with your Google Account to continue</p>
+    <h1 class = "center" >Youtube Playlist Downloader</h1>
+    <p id = "message" class = "center" style = "display: none;"> Please Login in with your Google Account to continue</p>
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize-button" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
-    <button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button>
+    <button id="authorize-button" class = "center" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
+    <button id="signout-button" class = "center" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button>
 
     <div id="playlistNames"></div>
 
