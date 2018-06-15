@@ -117,10 +117,9 @@
       {
           var p = document.createElement("div");
           var list = datas.result.items[index];
-          console.log(datas);
-            var img = document.createElement("img");
-            img.setAttribute("src", list.snippet.thumbnails.high);
-            p.appendChild(img);
+          var img = document.createElement("img");
+          img.setAttribute("src", list.snippet.thumbnails.high.url);
+          p.appendChild(img);
           document.getElementById('playlistNames').appendChild(p);
       }
     </script>
