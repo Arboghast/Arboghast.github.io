@@ -106,16 +106,16 @@
                 var playlistNames = document.createElement('p');
                 playlistNames.setAttribute("id", "plNames");
                 playlistNames.setAttribute("value",i);
-                playlistNames.setAttribute("onclick","displayPlaylist.call(this)");
+                playlistNames.setAttribute("onclick","displayPlaylist()");
                 playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
                 div.appendChild(playlistNames);
             }
         });
       }
 
-      function displayPlaylist(item)
+      function displayPlaylist()
       {
-          var index = item.value;
+          var index = this.value;
           var p = document.createElement("div");
           p.appendChild(document.createTextNode(index));
           document.getElementById('playlistNames').appendChild(p);
