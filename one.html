@@ -33,7 +33,7 @@
 
     <script type="text/javascript">
       //store api response data
-      var datas = '';
+      var datas = {};
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
       var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
@@ -117,6 +117,7 @@
       {
           var p = document.createElement("div");
           var list = datas.result.items[index];
+          console.log(datas);
             var img = document.createElement("img");
             img.setAttribute("src", list.snippet.thumbnails.high);
             p.appendChild(img);
