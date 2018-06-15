@@ -78,6 +78,7 @@
           signoutButton.style.display = 'block';
           makeApiCall();
         } else {
+          docuent.getElementById('content').innerHTML = '';
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
         }
