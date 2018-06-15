@@ -97,7 +97,7 @@
             'mine' : 'true'
         }).then(function(resp){
             var string = JSON.stringify(resp.result);
-            console.log(resp.items);
+            console.log(resp.result.items[0].snippet.title);
         });
       }
     </script>
