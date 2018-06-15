@@ -19,11 +19,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Say hello using the People API</title>
+    <title>Youtube Playlist Downloader</title>
     <meta charset='utf-8' />
   </head>
   <body>
-    <p>Say hello using the People API.</p>
+    <p>Youtube Playlist Downloader</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize-button" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
@@ -97,7 +97,7 @@
             'mine' : 'true'
         }).then(function(resp){
             var string = JSON.stringify(resp.result);
-            console.log(string);
+            console.log(resp.items[0].snippet.title);
         });
       }
     </script>
