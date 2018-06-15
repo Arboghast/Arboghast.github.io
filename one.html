@@ -118,12 +118,13 @@
       }
 
       function makeApiCallVideos(index){
-        var allVids = true;
+        var allVids = false;
         var nextPageToken = '';
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
             'mine' : 'true',
             'playlistId' : "" + id[index]+ "",
+            'pageToken': "CAoQAA",
             'maxResults' : 10 // max is 50, change it to 50 when properly working
           }).then(function(resp){
             
@@ -142,18 +143,18 @@
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
-                console.log(nextPageToken);
               }
               else{
                 allVids = false;
               }
 
           });
-        while(false)
-        {
+       if(allVids)
+       {
+
+       
           gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
-            'mine' : 'true',
             'playlistId' : "" + id[index]+ "",
             'pageToken' : nextPageToken,
             'maxResults' : 10 // max is 50, change it to 50 when properly working
@@ -178,6 +179,7 @@
                 allVids = false;
               }
           });
+          
         }
       }
 
