@@ -142,13 +142,14 @@
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
+                console.log(nextPageToken);
               }
               else{
                 allVids = false;
               }
 
           });
-        while(allVids)
+        while(false)
         {
           gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
