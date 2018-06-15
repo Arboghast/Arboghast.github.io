@@ -113,13 +113,16 @@
         });
       }
 
-      function displayPlaylist(item)
+      function displayPlaylist(index)
       {
-          var index = item;
-          alert(item);
-          alert(index);
           var p = document.createElement("div");
-          p.appendChild(document.createTextNode(index));
+          var list = datas.result.items[index];
+          for(var i = 0; i < list.length; i++)
+          {
+            var img = document.createElement("img");
+            img.setAttribute("src", "'list.snippet.thumbnails.high'");
+            p.appendChild(document.createTextNode(index));
+          }
           document.getElementById('playlistNames').appendChild(p);
       }
     </script>
