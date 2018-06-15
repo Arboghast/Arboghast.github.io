@@ -122,7 +122,8 @@
         gapi.client.youtube.playlistItems.list({
           'part' : 'snippet,contentDetails',
           'mine' : 'true',
-          'playlistId' : "" + id[index]+ ""
+          'playlistId' : "" + id[index]+ "",
+          'maxResults' : 50
         }).then(function(resp){
             datas2 = resp;
             var div = document.getElementById("content");
