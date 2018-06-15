@@ -144,6 +144,7 @@
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
                 loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.result.pageInfo.resultsPerPage));
+                console.log(loop);
               }
               else{
                 allVids = false;
