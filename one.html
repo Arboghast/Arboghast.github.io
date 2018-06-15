@@ -127,7 +127,7 @@
             'maxResults' : 10 // max is 50, change it to 50 when properly working
           }).then(function(resp){
             
-              var div = document.getElementById("content");
+              var div = document.getElementById("content"); 
               for(var i = 0; i < resp.result.items.length; i++)
               {
                 var vid = document.createElement("p");
@@ -143,14 +143,17 @@
               console.log(resp.result.hasOwnProperty("nextPageToken"));
               if(resp.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
+                console.log(true);
               }
               else{
                 allVids = false;
+                console.log(false);
               }
 
           });
         while(allVids)
         {
+          console.log(".");
           gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
             'mine' : 'true',
