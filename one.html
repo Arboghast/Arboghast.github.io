@@ -131,8 +131,8 @@
               for(var i = 0; i < resp.result.items.length; i++)
               {
                 var vid = document.createElement("p");
-                var title = resp.items[i].snippet.title;
-                var thumbnail = resp.items[i].snippet.thumbnails.default.url
+                var title = resp.result.items[i].snippet.title;
+                var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
                 img.setAttribute("src", thumbnail); 
                 vid.appendChild(document.createTextNode(title));
@@ -140,9 +140,9 @@
                 vid.appendChild(document.createElement("br"));
                 div.appendChild(vid);
               }
-              console.log(resp.hasOwnProperty("nextPageToken"));
+              console.log(resp.result.hasOwnProperty("nextPageToken"));
               if(resp.hasOwnProperty("nextPageToken")) {
-                nextPageToken = resp.nextPageToken;
+                nextPageToken = resp.result.nextPageToken;
               }
               else{
                 allVids = false;
