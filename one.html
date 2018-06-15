@@ -37,6 +37,7 @@
       //store api response data
       var datas = {};
       var datas2 = {};
+      var id = [];
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
       var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
@@ -106,6 +107,7 @@
             var div = document.getElementById('playlistNames');
             for(var i = 0; i < resp.result.items.length; i++)
             {
+                id.push(resp.result.items[i].id);
                 var playlistNames = document.createElement('p');
                 playlistNames.setAttribute("id", "plNames");
                 playlistNames.setAttribute("value",i);
@@ -116,10 +118,11 @@
         });
       }
 
-      function makeApiCallVideos(){
+      function makeApiCallVideos(index){
         gapi.client.youtube.playlistItems.list({
           'part' : 'snippet',
-          'mine' : 'true'
+          'mine' : 'true',
+          'playlistId' : "" + id[index]+ ""
         }).then(function(resp){
             datas2 = resp;
             var div = document.getElementById("content");
@@ -136,7 +139,7 @@
           img.setAttribute("src", list.snippet.thumbnails.high.url);
           p.appendChild(img);
           document.getElementById('playlistNames').appendChild(p);
-          makeApiCallVideos();
+          makeApiCallVideos(index);
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
