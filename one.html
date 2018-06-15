@@ -28,7 +28,7 @@
   </style>
   <body>
     <h1><center>Youtube Playlist Downloader</center></h1>
-    <p> Please Login in with your Google Account to continue</p>
+    <p id = "message" style = "display: none;"> Please Login in with your Google Account to continue</p>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize-button" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
     <button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button>
@@ -83,13 +83,16 @@
         });
       }
       function updateSigninStatus(isSignedIn) {
+        var mes = document.getElementById("message");
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
+          mes.style.display = 'none';
           signoutButton.style.display = 'block';
           makeApiCall();
         } else {
           document.getElementById('playlistNames').innerHTML = '';
           document.getElementById('content').innerHTML = '';
+          mes.style.display = 'block';
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
         }
