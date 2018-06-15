@@ -118,7 +118,7 @@
       }
 
       function makeApiCallVideos(index){
-        var allVids = false;
+        var allVids = true;
         var nextPageToken = '';
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
