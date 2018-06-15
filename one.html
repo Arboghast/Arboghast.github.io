@@ -96,7 +96,8 @@
             'part' : 'snippet',
             'mine' : 'true'
         }).then(function(resp){
-            alert(resp);
+            var string = JSON.stringify(resp.result);
+            alert(string);
         });
       }
     </script>
