@@ -143,8 +143,8 @@
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
-                loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.results.pageInfo.resultsPerPage));
-                console.log(loop);
+               // loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.results.pageInfo.resultsPerPage));
+                //console.log(loop);
                 console.log(resp.result.pageInfo.totalResults);
                 console.log(resp.results.pageInfo.resultsPerPage);
               }
