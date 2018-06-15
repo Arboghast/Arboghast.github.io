@@ -36,7 +36,6 @@
     <script type="text/javascript">
       //store api response data
       var datas = {};
-      var datas2 = {};
       var id = [];
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
@@ -119,17 +118,60 @@
       }
 
       function makeApiCallVideos(index){
-        gapi.client.youtube.playlistItems.list({
-          'part' : 'snippet,contentDetails',
-          'mine' : 'true',
-          'playlistId' : "" + id[index]+ "",
-          'maxResults' : 50
-        }).then(function(resp){
-            datas2 = resp;
-            var div = document.getElementById("content");
-            console.log(JSON.stringify(resp.result));
+        var allVids = true;
+        var nextPageToken = '';
+            gapi.client.youtube.playlistItems.list({
+            'part' : 'snippet,contentDetails',
+            'mine' : 'true',
+            'playlistId' : "" + id[index]+ "",
+            'maxResults' : 10 // max is 50, change it to 50 when properly working
+          }).then(function(resp){
+              var div = document.getElementById("content");
+              for(var i = 0; i < resp.items.length; i++)
+              {
+                var vid = document.createElement("p");
+                var title = resp.items[i].snippet.title;
+                var thumbnail = resp.items[i].snippet.thumbnails.default.url
+                var img = document.createElement("img");
+                img.setAttribute("src", thumbnail); 
+                vid.appendChild(document.createTextNode(title));
+                vid.appendChild(img);
+                vid.appendChild(document.createElement("br"));
+                div.appendChild(vid);
+              }
+              if(resp.hasOwnProperty("nextPageToken")) {
+                nextPageToken = resp.nextPageToken;
+              }
+              else{
+                allVids = false;
+              }
 
-        });
+          });
+        while(allVids)
+        {
+          gapi.client.youtube.playlistItems.list({
+            'part' : 'snippet,contentDetails',
+            'mine' : 'true',
+            'playlistId' : "" + id[index]+ "",
+            'pageToken' : nextPageToken,
+            'maxResults' : 10 // max is 50, change it to 50 when properly working
+          }).then(function(resp){
+              var div = document.getElementById("content");
+              for(var i = 0; i < resp.items.length; i++)
+              {
+                var vid = document.createElement("p");
+                var title = resp.items[i].snippet.title;
+                var thumbnail = resp.items[i].snippet.thumbnails.default.url
+                var img = document.createElement("img");
+                img.setAttribute("src", thumbnail); 
+                vid.appendChild(document.createTextNode(title));
+                vid.appendChild(img);
+                vid.appendChild(document.createElement("br"));
+                div.appendChild(vid);
+              }
+
+          });
+        }
       }
 
       function displayPlaylist(index)
