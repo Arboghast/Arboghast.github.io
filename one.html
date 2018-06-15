@@ -120,7 +120,7 @@
 
       function makeApiCallVideos(index){
         gapi.client.youtube.playlistItems.list({
-          'part' : 'snippet',
+          'part' : 'snippet,contentDetails',
           'mine' : 'true',
           'playlistId' : "" + id[index]+ ""
         }).then(function(resp){
