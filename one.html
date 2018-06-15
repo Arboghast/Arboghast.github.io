@@ -47,10 +47,10 @@
       // Enter one or more authorization scopes. Refer to the documentation for
       // the API or https://developers.google.com/people/v1/how-tos/authorizing
       // for details.
-      var scopes = ["profile","https://www.googleapis.com/auth/youtube",
-      "https://www.googleapis.com/auth/youtube.force-ssl",
-      "https://www.googleapis.com/auth/youtube.readonly",
-      "https://www.googleapis.com/auth/youtube.upload"];
+      var scopes = "profile" + " " + "https://www.googleapis.com/auth/youtube"
+      + " " + "https://www.googleapis.com/auth/youtube.force-ssl"
+      + " " + "https://www.googleapis.com/auth/youtube.readonly"
+      + " " + "https://www.googleapis.com/auth/youtube.upload";
       var authorizeButton = document.getElementById('authorize-button');
       var signoutButton = document.getElementById('signout-button');
       
