@@ -101,15 +101,13 @@
         }).then(function(resp){
             datas = resp;
             var div = document.getElementById('playlistNames');
-            for(var i = 0; i < resp.result.items.length; i++)
-            {
                 var playlistNames = document.createElement('p');
                 playlistNames.setAttribute("id", "plNames");
                 playlistNames.setAttribute("value",i);
                 playlistNames.onclick = Function("displayPlaylist(" + i + ")");
                 playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
                 div.appendChild(playlistNames);
-            }
+            
         });
       }
 
