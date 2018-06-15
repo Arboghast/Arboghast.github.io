@@ -136,6 +136,7 @@
           img.setAttribute("src", list.snippet.thumbnails.high.url);
           p.appendChild(img);
           document.getElementById('playlistNames').appendChild(p);
+          makeApiCallVideos();
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
