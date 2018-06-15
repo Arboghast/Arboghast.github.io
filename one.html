@@ -126,8 +126,9 @@
             'playlistId' : "" + id[index]+ "",
             'maxResults' : 10 // max is 50, change it to 50 when properly working
           }).then(function(resp){
+            
               var div = document.getElementById("content");
-              for(var i = 0; i < resp.items.length; i++)
+              for(var i = 0; i < resp.result.items.length; i++)
               {
                 var vid = document.createElement("p");
                 var title = resp.items[i].snippet.title;
