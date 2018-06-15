@@ -118,7 +118,7 @@
       }
 
       function makeApiCallVideos(index){
-        var allVids = true;
+        var allVids = false;
         var nextPageToken = '';
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
@@ -139,6 +139,7 @@
                 vid.appendChild(document.createElement("br"));
                 div.appendChild(vid);
               }
+              console.log(resp.hasOwnProperty("nextPageToken"));
               if(resp.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.nextPageToken;
               }
