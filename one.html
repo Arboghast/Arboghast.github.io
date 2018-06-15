@@ -29,9 +29,11 @@
     <button id="authorize-button" style="display: none;" onclick = "handleAuthClick()">Authorize</button>
     <button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button>
 
-    <div id="content"></div>
+    <div id="playlistNames"></div>
 
     <script type="text/javascript">
+      //store api response data
+      var datas = '';
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
       var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
@@ -79,6 +81,7 @@
           signoutButton.style.display = 'block';
           makeApiCall();
         } else {
+          document.getElementById('playlistNames').innerHTML = '';
           document.getElementById('content').innerHTML = '';
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -96,17 +99,26 @@
             'part' : 'snippet',
             'mine' : 'true'
         }).then(function(resp){
-            var string = JSON.stringify(resp.result);
-            console.log(resp.result.items[0].snippet.title);
-            var div = document.getElementById('content');
+            datas = resp;
+            var div = document.getElementById('playlistNames');
             for(var i = 0; i < resp.result.items.length; i++)
             {
-                var playlistNames = document.createElement('div');
+                var playlistNames = document.createElement('p');
                 playlistNames.setAttribute("id", "plNames");
+                playlistNames.setAttribute("value",i);
+                playlistNames.setAttribute("onclick","displayPlaylist(this)");
                 playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
                 div.appendChild(playlistNames);
             }
         });
+      }
+
+      function displayPlaylist(item)
+      {
+          var index = item.value;
+          var p = document.createElement("div");
+          p.appendChild(document.createTextNode(index));
+          document.getElementById('playlistNames').appendChild(p);
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
