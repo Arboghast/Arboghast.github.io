@@ -98,6 +98,14 @@
         }).then(function(resp){
             var string = JSON.stringify(resp.result);
             console.log(resp.result.items[0].snippet.title);
+            var div = document.getElementById('content');
+            for(var i = 0; i < resp.result.items.length; i++)
+            {
+                var playlistNames = document.createElement('div');
+                playlistNames.setAttribute("id", "plNames");
+                playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
+                div.appendChild(playlistNames);
+            }
         });
       }
     </script>
