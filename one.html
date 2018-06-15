@@ -118,7 +118,7 @@
       }
 
       function makeApiCallVideos(index){
-        var allVids = false;
+        var allVids = true;
         var nextPageToken = '';
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
@@ -140,14 +140,11 @@
                 vid.appendChild(document.createElement("br"));
                 div.appendChild(vid);
               }
-              console.log(resp.result.hasOwnProperty("nextPageToken"));
-              if(resp.hasOwnProperty("nextPageToken")) {
+              if(resp.result.hasOwnProperty("nextPageToken")) {
                 nextPageToken = resp.result.nextPageToken;
-                console.log(true);
               }
               else{
                 allVids = false;
-                console.log(false);
               }
 
           });
@@ -174,7 +171,12 @@
                 vid.appendChild(document.createElement("br"));
                 div.appendChild(vid);
               }
-
+              if(resp.result.hasOwnProperty("nextPageToken")) {
+                nextPageToken = resp.result.nextPageToken;
+              }
+              else{
+                allVids = false;
+              }
           });
         }
       }
