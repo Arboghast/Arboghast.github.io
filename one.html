@@ -142,7 +142,7 @@
                 var nextPageToken = resp.result.nextPageToken;
                 var loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.result.pageInfo.resultsPerPage));
                 loop--;
-                makeApiCallVideo2(loop,index,nextPageToken);
+                makeApiCallVideo2(index,nextPageToken);
               }
           });
       }
