@@ -118,10 +118,6 @@
       }
      
       function makeApiCallVideos(index){
-        var allVids = true;
-        var nextPageToken = '';
-        var loop = 0;
-        
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
             'mine' : 'true',
@@ -143,21 +139,17 @@
                 div.appendChild(vid);
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
-                nextPageToken = resp.result.nextPageToken;
-                loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.result.pageInfo.resultsPerPage));
+                var nextPageToken = resp.result.nextPageToken;
+                var loop = Math.ceil((resp.result.pageInfo.totalResults)/(resp.result.pageInfo.resultsPerPage));
                 loop--;
+                makeApiCallVideo2(loop,index,nextPageToken);
               }
-              else{
-                allVids = false;
-              }
-
           });
-       if(allVids)
-       {
-         for(var j = 0; j < loop; j++)
-         {
-              console.log(".")
-              gapi.client.youtube.playlistItems.list({
+      }
+      function makeApiCallVideo2(index,token)
+      {
+        var nextPageToken = token;
+        gapi.client.youtube.playlistItems.list({
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
                 'pageToken' : nextPageToken,
@@ -177,12 +169,10 @@
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
-                    nextPageToken = resp.result.nextPageToken;
+                    nextPageToken = resp.result.nextPageToken; 
+                    makeApiCallVideo2(index,nextPageToken);
                   }
               });
-         }
-        }
-
       }
 
       function displayPlaylist(index)
