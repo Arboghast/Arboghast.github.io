@@ -106,7 +106,7 @@
                 var playlistNames = document.createElement('p');
                 playlistNames.setAttribute("id", "plNames");
                 playlistNames.setAttribute("value",i);
-                playlistNames.setAttribute("onclick","displayPlaylist(this)");
+                playlistNames.setAttribute("onclick","displayPlaylist.call(this)");
                 playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
                 div.appendChild(playlistNames);
             }
