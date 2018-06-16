@@ -34,6 +34,7 @@
   .playlistText
   {
     height: inherit;
+    width: 20%;
     border: 3px solid #73AD21;
     padding: 20px, 5px, 20px, 5px;
     
@@ -128,7 +129,7 @@
             for(var i = 0; i < resp.result.items.length; i++)
             {
                 id.push(resp.result.items[i].id);
-                var text = document.createElement("p");
+                var text = document.createElement("div");
                 text.onclick = Function("makeApiCallVideos(" + i + ")");
                 text.setAttribute("class","playlistText");
                 text.setAttribute("value",i);
