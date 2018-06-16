@@ -181,8 +181,8 @@
                 var text = document.createElement("span");
                 text.innerHTML = title;
                 text.setAttribute("class", "title");
-              //  vid.appendChild(text);
                 vid.appendChild(img);
+                vid.appendChild(text);
                 div.appendChild(vid);
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
@@ -213,8 +213,8 @@
                     var text = document.createElement("span");
                     text.innerHTML = title;
                     text.setAttribute("class", "title");
-                  //  vid.appendChild(text);
                     vid.appendChild(img);
+                    vid.appendChild(text);
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
