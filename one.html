@@ -23,7 +23,16 @@
     <meta charset='utf-8' />
   </head>
   <style>
-  
+  #playlistNames
+  {
+    width: 90%;
+    position: fixed;
+    border: 3px solid #73AD21
+  }
+  .pImages
+  {
+    z-index: -1;
+  }
   
   </style>
   <body>
@@ -119,6 +128,7 @@
                 pic.onclick = Function("makeApiCallVideos(" + i + ")");
                 var text = document.createElement("p");
                 img.setAttribute("src", datas.result.items[i].snippet.thumbnails.default.url);
+                img.setAttribute("class", "pImages");
                 text.setAttribute("class","imgText");
                 text.setAttribute("value",i);
                 text.innerHTML = resp.result.items[i].snippet.title;
