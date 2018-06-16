@@ -164,7 +164,6 @@
                 img.setAttribute("src", thumbnail); 
                 vid.appendChild(document.createTextNode(title));
                 vid.appendChild(img);
-                vid.appendChild(document.createElement("br"));
                 div.appendChild(vid);
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
@@ -186,13 +185,13 @@
                   for(var i = 0; i < resp.result.items.length; i++)
                   {
                     var vid = document.createElement("p");
+                    vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
                     img.setAttribute("src", thumbnail); 
                     vid.appendChild(document.createTextNode(title));
                     vid.appendChild(img);
-                    vid.appendChild(document.createElement("br"));
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
