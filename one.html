@@ -118,7 +118,7 @@
                 var img = document.createElement("img");
                 pic.onclick = Function("makeApiCallVideos(" + i + ")");
                 var text = document.createElement("p");
-                img.setAttribute("src", datas.result.items[i].snippet.thumbnails.high.url);
+                img.setAttribute("src", datas.result.items[i].snippet.thumbnails.default.url);
                 text.setAttribute("class","imgText");
                 text.setAttribute("value",i);
                 text.innerHTML = resp.result.items[i].snippet.title;
