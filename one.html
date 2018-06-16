@@ -49,7 +49,10 @@
     text-align: center;
     float: left;
   }
-  
+  .video
+  {
+    float:left;
+  }
   </style>
   <body>
     <h1><center>Youtube Playlist Downloader</center></h1>
@@ -166,6 +169,7 @@
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
                 img.setAttribute("src", thumbnail); 
+                img.setAttribute("class", "video");
                 vid.appendChild(document.createTextNode(title));
                 vid.appendChild(img);
                 div.appendChild(vid);
@@ -193,7 +197,8 @@
                     var title = resp.result.items[i].snippet.title;
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
-                    img.setAttribute("src", thumbnail); 
+                    img.setAttribute("src", thumbnail);
+                    img.setAttribute("class", "video"); 
                     vid.appendChild(document.createTextNode(title));
                     vid.appendChild(img);
                     div.appendChild(vid);
