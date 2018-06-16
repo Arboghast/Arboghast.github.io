@@ -141,6 +141,11 @@
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
       }
+
+      function wipeContent()
+      {
+        document.getElementById("content").innerHTML = '';
+      }
       // Load the API and make an API call.  Display the results on the screen.
       function makeApiCall() {
         gapi.client.youtube.playlists.list({
@@ -153,7 +158,7 @@
             {
                 id.push(resp.result.items[i].id);
                 var text = document.createElement("div");
-                text.onclick = Function("makeApiCallVideos(" + i + ")");
+                text.onclick = Function("wipeContent();" + "makeApiCallVideos(" + i + ");");
                 text.setAttribute("class","playlistText");
                 text.setAttribute("value",i);
                 text.innerHTML = resp.result.items[i].snippet.title;
