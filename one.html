@@ -114,12 +114,16 @@
             for(var i = 0; i < resp.result.items.length; i++)
             {
                 id.push(resp.result.items[i].id);
-                var playlistNames = document.createElement('p');
-                playlistNames.setAttribute("id", "plNames");
-                playlistNames.setAttribute("value",i);
-                playlistNames.onclick = Function("displayPlaylist(" + i + ")");
-                playlistNames.appendChild(document.createTextNode(resp.result.items[i].snippet.title));
-                div.appendChild(playlistNames);
+                var pic = document.createElement("div");
+                var img = document.createElement("img");
+                pic.onclick = Function("makeApiCallVideos(" + i + ")");
+                var text = document.createTextNode(resp.result.items[i].snippet.title)
+                img.setAttribute("src", datas.result.items[i].snippet.thumbnails.high.url);
+                text.setAttribute("class","imgText");
+                text.setAttribute("value",i);
+                img.appendChild(text);
+                pic.appendChild(img);
+                div.appendChild(pic);
             }
         });
       }
@@ -178,17 +182,6 @@
                     makeApiCallVideo2(index,nextPageToken);
                   }
               });
-      }
-
-      function displayPlaylist(index)
-      {
-          var p = document.createElement("div");
-          var list = datas.result.items[index];
-          var img = document.createElement("img");
-          img.setAttribute("src", list.snippet.thumbnails.high.url);
-          p.appendChild(img);
-          document.getElementById('playlistNames').appendChild(p);
-          makeApiCallVideos(index);
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
