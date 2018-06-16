@@ -28,7 +28,6 @@
     width: 90%;
     height: 10%;
     position: static;
-    border: 3px solid #73AD21;
     margin: 0 auto;
   }
   .playlistText
@@ -36,12 +35,9 @@
     height: 30px;
     width: 19.5%;
     position: relative;
-    border: 3px solid rgb(0, 0, 0);
+    border: 1px ridge rgb(0, 0, 0);
     float:left; 
-    display: inline-block;
     text-align: center;
-    margin: auto;
-    
   }
   
   </style>
@@ -51,7 +47,7 @@
     <!--Add buttons to initiate auth sequence and sign out-->
     <center><button id="authorize-button"  style="display: none;" onclick = "handleAuthClick()">Authorize</button></center>
     <center><button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button></center>
-
+    <br>
     <div id="playlistNames"></div>
 
     <div id="content"></div>
