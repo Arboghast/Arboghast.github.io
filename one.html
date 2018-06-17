@@ -82,6 +82,7 @@
 
     <script type="text/javascript">
       //store api response data
+      var queue = [];
       var datas = {};
       var id = [];
       // Enter an API key from the Google API Console:
@@ -234,6 +235,10 @@
                     makeApiCallVideo2(index,nextPageToken);
                   }
               });
+      }
+      function addToQueue()
+      {
+
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
