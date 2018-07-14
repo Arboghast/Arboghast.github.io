@@ -153,7 +153,7 @@
         document.getElementById("content").innerHTML = '';
       }
       // Load the API and make an API call.  Display the results on the screen.
-      function makeApiCall() {
+      function makeApiCall() { //get playlist names
         gapi.client.youtube.playlists.list({
             'part' : 'snippet',
             'mine' : 'true'
@@ -173,7 +173,7 @@
         });
       }
      
-      function makeApiCallVideos(index){
+      function makeApiCallVideos(index){ //get playlists` videos
             gapi.client.youtube.playlistItems.list({
             'part' : 'snippet,contentDetails',
             'mine' : 'true',
@@ -204,9 +204,7 @@
               }
           });
       }
-      function makeApiCallVideo2(index,token)
-      {
-        var nextPageToken = token;
+      function makeApiCallVideo2(index,nextPageToken) { //recursive next step for makeapicallvideo()
         gapi.client.youtube.playlistItems.list({
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
@@ -231,8 +229,7 @@
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
-                    nextPageToken = resp.result.nextPageToken; 
-                    makeApiCallVideo2(index,nextPageToken);
+                    makeApiCallVideo2(index,resp.result.nextPageToken);
                   }
               });
       }
