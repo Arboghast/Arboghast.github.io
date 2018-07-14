@@ -157,7 +157,7 @@
         gapi.client.youtube.playlists.list({
             'part' : 'snippet',
             'mine' : 'true',
-            'maxResults': '25'
+            'maxResults': '25' //this makes it so only 25 playlists will be displayed
         }).then(function(resp){
             datas = resp;
             var div = document.getElementById('playlistNames');
@@ -179,7 +179,7 @@
             'part' : 'snippet,contentDetails',
             'mine' : 'true',
             'playlistId' : "" + id[index]+ "",
-            'maxResults' : 10 // max is 50, change it to 50 when properly working
+            'maxResults' : 50 
           }).then(function(resp){
             
               var div = document.getElementById("content"); 
@@ -210,7 +210,7 @@
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
                 'pageToken' : nextPageToken,
-                'maxResults' : 10 // max is 50, change it to 50 when properly working
+                'maxResults' : 50 
               }).then(function(resp){
                 var div = document.getElementById("content"); 
                   for(var i = 0; i < resp.result.items.length; i++)
