@@ -204,9 +204,9 @@
               }
           });
       }
-      function makeApiCallVideo2(index,nextPageToken,counter) { //recursive next step for makeapicallvideo()
+      function makeApiCallVideo2(index,nextPageToken/*,counter*/) { //recursive next step for makeapicallvideo()
         
-        var count = counter++;
+      //  var count = counter++;
         gapi.client.youtube.playlistItems.list({
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
@@ -216,6 +216,7 @@
                 var div = document.getElementById("content"); 
                   for(var i = 0; i < resp.result.items.length; i++)
                   {
+                    console.log(resp.result.items[i]);
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
@@ -231,11 +232,11 @@
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
-                        if(count == 4)
+                     /* if(count == 4)
                         {
                             setTimeout(makeApiCallVideo2(index,resp.result.nextPageToken,0), 3000 );
-                        }
-                        makeApiCallVideo2(index,resp.result.nextPageToken,count);
+                        }*/
+                        makeApiCallVideo2(index,resp.result.nextPageToken/*,count*/);
                   }
               });
       }
