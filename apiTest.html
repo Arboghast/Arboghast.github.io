@@ -1,0 +1,249 @@
+<!--
+  Copyright (c) 2011 Google Inc.
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy of
+  the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  License for the specific language governing permissions and limitations under
+  the License.
+  To run this sample, set apiKey to your application's API key and clientId to
+  your application's OAuth 2.0 client ID. They can be generated at:
+    https://console.developers.google.com/apis/credentials?project=_
+  Then, add a JavaScript origin to the client that corresponds to the domain
+  where you will be running the script. Finally, activate the People API at:
+    https://console.developers.google.com/apis/library?project=_
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Youtube Playlist Downloader</title>
+    <meta charset='utf-8' />
+  </head>
+  <style>
+  #playlistNames
+  {
+    width: 90%;
+    height: 10%;
+    position: static;
+    margin: 0 auto;
+  }
+  .playlistText
+  {
+    height: 30px;
+    width: 19.5%;
+    position: relative;
+    border: 1px ridge black;
+    float:left; 
+    text-align: center;
+  }
+  .vidTemplate
+  {
+    width: 22%;
+    height: 90px;
+    position: static;
+    float: left;
+    padding-right: 2%;
+    cursor: pointer;
+    background-color: blueviolet;
+  }
+  .video
+  {
+    display: block;
+    float:left;
+    position:static;
+  }
+  .title
+  {
+    text-overflow:ellipsis;
+    display: inline;
+    position: static;
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+  #content
+  {
+    margin-left: 3.5%;
+  }
+  </style>
+  <body>
+    <h1><center>UCmr0x7IcPKCeT1XfQmy0PBg</center></h1>
+    <p><center id = "message" style = "display: none;"> sit amet, consectetur adipiscing elit. Vivamus ac justo erat.</center></p>
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <center><button id="authorize-button"  style="display: none;" onclick = "handleAuthClick()">Authorize</button></center>
+    <center><button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button></center>
+    <br>
+    <div id="playlistNames"></div>
+    <br>
+    <div id="content"></div>
+
+    <script type="text/javascript">
+      //store api response data
+      var queue = [];
+      var datas = {};
+      var id = [];
+      // Enter an API key from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials
+      var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '342850676381-2kcnojm83o3upsqqg8s51u0mpdv2udmk.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile" + " " + "https://www.googleapis.com/auth/youtube"
+      + " " + "https://www.googleapis.com/auth/youtube.force-ssl"
+      + " " + "https://www.googleapis.com/auth/youtube.readonly"
+      + " " + "https://www.googleapis.com/auth/youtube.upload";
+      var authorizeButton = document.getElementById('authorize-button');
+      var signoutButton = document.getElementById('signout-button');
+      
+      //launches auth
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
+      
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        });
+      }
+      function updateSigninStatus(isSignedIn) {
+        var mes = document.getElementById("message");
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          mes.style.display = 'none';
+          signoutButton.style.display = 'block';
+          makeApiCall();
+        } else {
+          document.getElementById('playlistNames').innerHTML = '';
+          document.getElementById('content').innerHTML = '';
+          mes.style.display = 'block';
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+        }
+      }
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      function wipeContent()
+      {
+        document.getElementById("content").innerHTML = '';
+      }
+      // Load the API and make an API call.  Display the results on the screen.
+      function makeApiCall() { //get playlist names
+        gapi.client.youtube.playlists.list({
+            'part' : 'snippet',
+            'mine' : 'true',
+            'maxResults': '25' //this makes it so only 25 playlists will be displayed
+        }).then(function(resp){
+            datas = resp;
+            var div = document.getElementById('playlistNames');
+            for(var i = 0; i < resp.result.items.length; i++)
+            {
+                id.push(resp.result.items[i].id);
+                var text = document.createElement("div");
+                text.onclick = Function("wipeContent();" + "makeApiCallVideos(" + i + ");");
+                text.setAttribute("class","playlistText");
+                text.setAttribute("value",i);
+                text.innerHTML = resp.result.items[i].snippet.title;
+                div.appendChild(text);
+            }
+        });
+      }
+     
+      function makeApiCallVideos(index){ //get playlists` videos
+            gapi.client.youtube.playlistItems.list({
+            'part' : 'snippet,contentDetails',
+            'mine' : 'true',
+            'playlistId' : "" + id[index]+ "",
+            'maxResults' : 50 
+          }).then(function(resp){
+            
+              var div = document.getElementById("content"); 
+              for(var i = 0; i < resp.result.items.length; i++)
+              {
+                var vid = document.createElement("p");
+                vid.setAttribute("class", "vidTemplate");
+                var title = resp.result.items[i].snippet.title;
+                var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
+                var img = document.createElement("img");
+                img.setAttribute("src", thumbnail); 
+                img.setAttribute("class", "video");
+                var text = document.createElement("center");
+                text.innerHTML = title;
+                text.setAttribute("class", "title");
+                vid.appendChild(img);
+                vid.appendChild(text);
+                div.appendChild(vid);
+              }
+              if(resp.result.hasOwnProperty("nextPageToken")) {
+                makeApiCallVideo2(index,resp.result.nextPageToken,1);
+              }
+          });
+      }
+      function makeApiCallVideo2(index,nextPageToken,counter) { //recursive next step for makeapicallvideo()
+        
+        var count = counter++;
+        gapi.client.youtube.playlistItems.list({
+                'part' : 'snippet,contentDetails',
+                'playlistId' : "" + id[index]+ "",
+                'pageToken' : nextPageToken,
+                'maxResults' : 50 
+              }).then(function(resp){
+                var div = document.getElementById("content"); 
+                  for(var i = 0; i < resp.result.items.length; i++)
+                  {
+                    var vid = document.createElement("p");
+                    vid.setAttribute("class", "vidTemplate");
+                    var title = resp.result.items[i].snippet.title;
+                    var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
+                    var img = document.createElement("img");
+                    img.setAttribute("src", thumbnail);
+                    img.setAttribute("class", "video"); 
+                    var text = document.createElement("center");
+                    text.innerHTML = title;
+                    text.setAttribute("class", "title");
+                    vid.appendChild(img);
+                    vid.appendChild(text);
+                    div.appendChild(vid);
+                  }
+                  if(resp.result.hasOwnProperty("nextPageToken")) {
+                        if(count == 4)
+                        {
+                            setTimeout(makeApiCallVideo2(index,resp.result.nextPageToken,0), 3000 );
+                        }
+                        makeApiCallVideo2(index,resp.result.nextPageToken,count);
+                  }
+              });
+      }
+      function addToQueue()
+      {
+
+      }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+  </body>
+</html>
