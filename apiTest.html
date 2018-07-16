@@ -79,6 +79,10 @@
     <div id="playlistNames"></div>
     <br>
     <div id="content"></div>
+    <br>
+    <div id="deleted">0</div>
+    <br>
+    <div id="private">0</div>
 
     <script type="text/javascript">
       //store api response data
@@ -188,8 +192,25 @@
                 var vid = document.createElement("p");
                 vid.setAttribute("class", "vidTemplate");
                 var title = resp.result.items[i].snippet.title;
+                if(title == "Deleted video")
+                  {
+                    document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
+                    continue;
+                  }
+                if(title == "Private video")
+                {
+                    document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
+                    continue;
+                }
+                vid.setAttribute("onclick","addToQueue(this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
+                vid.setAttribute("value",
+                {
+                  "videoId" : resp.result.items[i].snippet.resourceId.videoId,
+                  "imgsrc" : thumbnail,
+                  "title" : title
+                });
                 img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
@@ -200,13 +221,11 @@
                 div.appendChild(vid);
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
-                makeApiCallVideo2(index,resp.result.nextPageToken,1);
+                makeApiCallVideo2(index,resp.result.nextPageToken);
               }
           });
       }
-      function makeApiCallVideo2(index,nextPageToken/*,counter*/) { //recursive next step for makeapicallvideo()
-        
-      //  var count = counter++;
+      function makeApiCallVideo2(index,nextPageToken) { //recursive next step for makeapicallvideo()
         gapi.client.youtube.playlistItems.list({
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
@@ -216,16 +235,29 @@
                 var div = document.getElementById("content"); 
                   for(var i = 0; i < resp.result.items.length; i++)
                   {
-                    if(resp.result.items[i].snippet.title == "Deleted video")
-                    {
-                        i--;
-                        continue;
-                    }
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
+                    vid.setAttribute("onclick","addToQueue(this);");
                     var title = resp.result.items[i].snippet.title;
+                    //console.log(resp.result.items[i].snippet);
+                    if(title == "Deleted video")
+                    {
+                      document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
+                      continue;
+                    }
+                    if(title == "Private video")
+                    {
+                      document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
+                      continue;
+                    }
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
+                    vid.setAttribute("value",
+                    {
+                      "videoId" : resp.result.items[i].snippet.resourceId.videoId,
+                      "imgsrc" : thumbnail,
+                      "title" : title
+                    });
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
@@ -236,18 +268,15 @@
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
-                     /* if(count == 4)
-                        {
-                            setTimeout(makeApiCallVideo2(index,resp.result.nextPageToken,0), 3000 );
-                        }
-                        else*/
-                        makeApiCallVideo2(index,resp.result.nextPageToken/*,count*/);
+                        makeApiCallVideo2(index,resp.result.nextPageToken);
                   }
               });
       }
-      function addToQueue()
+      function addToQueue(scraps)
       {
-
+        console.log(scraps);
+        console.log(scraps[0]);
+        console.log(scraps.innerHTML);
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
