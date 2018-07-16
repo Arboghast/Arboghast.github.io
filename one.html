@@ -202,10 +202,15 @@
                     document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
                     continue;
                 }
-                vid.setAttribute("value",resp.result.items[i].snippet.resourceId.videoId);
                 vid.setAttribute("onclick","addToQueue(this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
+                vid.setAttribute("value",
+                {
+                  "videoId" : resp.result.items[i].snippet.resourceId.videoId,
+                  "imgsrc" : thumbnail,
+                  "title" : title
+                });
                 img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
@@ -245,9 +250,14 @@
                       document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
                       continue;
                     }
-                    vid.setAttribute("value",resp.result.items[i].snippet.resourceId.videoId);
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
+                    vid.setAttribute("value",
+                    {
+                      "videoId" : resp.result.items[i].snippet.resourceId.videoId,
+                      "imgsrc" : thumbnail,
+                      "title" : title
+                    });
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
