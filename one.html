@@ -200,12 +200,13 @@
                 div.appendChild(vid);
               }
               if(resp.result.hasOwnProperty("nextPageToken")) {
-                var nextPageToken = resp.result.nextPageToken;
-                makeApiCallVideo2(index,nextPageToken);
+                makeApiCallVideo2(index,resp.result.nextPageToken,1);
               }
           });
       }
-      function makeApiCallVideo2(index,nextPageToken) { //recursive next step for makeapicallvideo()
+      function makeApiCallVideo2(index,nextPageToken/*,counter*/) { //recursive next step for makeapicallvideo()
+        
+      //  var count = counter++;
         gapi.client.youtube.playlistItems.list({
                 'part' : 'snippet,contentDetails',
                 'playlistId' : "" + id[index]+ "",
@@ -215,6 +216,11 @@
                 var div = document.getElementById("content"); 
                   for(var i = 0; i < resp.result.items.length; i++)
                   {
+                    if(resp.result.items[i].snippet.title == "Deleted video")
+                    {
+                        i--;
+                        continue;
+                    }
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
@@ -230,7 +236,12 @@
                     div.appendChild(vid);
                   }
                   if(resp.result.hasOwnProperty("nextPageToken")) {
-                    makeApiCallVideo2(index,resp.result.nextPageToken);
+                     /* if(count == 4)
+                        {
+                            setTimeout(makeApiCallVideo2(index,resp.result.nextPageToken,0), 3000 );
+                        }
+                        else*/
+                        makeApiCallVideo2(index,resp.result.nextPageToken/*,count*/);
                   }
               });
       }
