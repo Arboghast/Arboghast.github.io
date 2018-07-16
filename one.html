@@ -86,6 +86,7 @@
 
     <script type="text/javascript">
       //store api response data
+      var queueCounter = 0;
       var queue = [];
       var onclickData = [];
       var datas = {};
@@ -204,15 +205,10 @@
                     document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
                     continue;
                 }
-                vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +");");
+                vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
-                onclickData[resp.result.items[i].snippet.position] =
-                {
-                  "videoId" : resp.result.items[i].snippet.resourceId.videoId,
-                  "imgsrc" : thumbnail,
-                  "title" : title
-                };
+                onclickData[resp.result.items[i].snippet.position] =resp.result.items[i].snippet.resourceId.videoId;
                 img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
@@ -251,15 +247,10 @@
                       document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
                       continue;
                     }
-                    vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+");");
+                    vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+",this);");
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
-                    onclickData[resp.result.items[i].snippet.position] =
-                    {
-                      "videoId" : resp.result.items[i].snippet.resourceId.videoId,
-                      "imgsrc" : thumbnail,
-                      "title" : title
-                    };
+                    onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId,
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
@@ -274,12 +265,14 @@
                   }
               });
       }
-      function addToQueue(scraps)
+      function addToQueue(scraps,theHtml)
       {
-        console.log(scraps);
-        console.log(scraps.videoId);
-        console.log(scraps.imgsrc);
-        console.log(scraps.title);
+        queue[queueCounter] = {
+          data : onclickData[scraps],
+          html : theHtml
+        }
+        queueCounter++;
+
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
