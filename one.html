@@ -192,6 +192,17 @@
                 var vid = document.createElement("p");
                 vid.setAttribute("class", "vidTemplate");
                 var title = resp.result.items[i].snippet.title;
+                if(title == "Deleted video")
+                  {
+                    document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
+                    continue;
+                  }
+                if(title == "Private video")
+                {
+                    document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
+                    continue;
+                }
+                vid.setAttribute("value",resp.result.items[i].snippet.resourceId.videoId);
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
                 img.setAttribute("src", thumbnail); 
@@ -232,6 +243,7 @@
                       document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
                       continue;
                     }
+                    vid.setAttribute("value",resp.result.items[i].snippet.resourceId.videoId);
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
                     img.setAttribute("src", thumbnail);
