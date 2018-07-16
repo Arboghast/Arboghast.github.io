@@ -216,14 +216,13 @@
                 var div = document.getElementById("content"); 
                   for(var i = 0; i < resp.result.items.length; i++)
                   {
-                    if(resp.result.items[i].snippet.title == "Deleted video")
-                    {
-                        i--;
-                        continue;
-                    }
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
+                    if(title == "Deleted Video")
+                    {
+                      continue;
+                    }
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
                     img.setAttribute("src", thumbnail);
