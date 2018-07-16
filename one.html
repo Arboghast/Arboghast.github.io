@@ -203,6 +203,7 @@
                     continue;
                 }
                 vid.setAttribute("value",resp.result.items[i].snippet.resourceId.videoId);
+                vid.setAttribute("onclick","addToQueue(this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
                 img.setAttribute("src", thumbnail); 
@@ -231,8 +232,9 @@
                   {
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
+                    vid.setAttribute("onclick","addToQueue(this);");
                     var title = resp.result.items[i].snippet.title;
-                    console.log(resp.result.items[i].snippet);
+                    //console.log(resp.result.items[i].snippet);
                     if(title == "Deleted video")
                     {
                       document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
@@ -260,9 +262,10 @@
                   }
               });
       }
-      function addToQueue()
+      function addToQueue(scraps)
       {
-
+        console.log(scraps);
+        console.log(scraps.value);
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
