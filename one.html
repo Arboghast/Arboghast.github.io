@@ -220,7 +220,7 @@
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
                     console.log(resp.result.items[i].snippet);
-                    if(title == "Deleted video")
+                    if(title == "Deleted video" || title == "Private video")
                     {
                       continue;
                     }
