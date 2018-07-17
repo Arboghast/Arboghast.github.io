@@ -235,7 +235,7 @@
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
-                    console.log(resp.result.items[i].snippet);
+                    //console.log(resp.result.items[i].snippet);
                     if(title == "Deleted video" || title == "Private video")
                     {
                       unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
@@ -295,6 +295,7 @@
       {
         for(var i = queueCounter; i >= 0; i--)
         {
+          console.log(i);
           var html = queue[i].html;
           html.setAttribute(onclick, "download()");
           document.getElementById("queue").innerHTML += html + "<br>";
