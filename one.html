@@ -197,9 +197,10 @@
                 //console.log(resp.result.items[i].snippet);
                 if(title == "Deleted video" || title == "Private video")
                     {
-                      var prevTitle = onclickData[resp.result.items[i].snippet.position].title;
-                      document.getElementById('unavailable').appendChild(document.createElement(br));
+                      var prevTitle = onclickData[resp.result.items[i].snippet.position-1].title;
                       document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
+                      unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
+                      unavailableCounter++;
                       continue;
                     }
                 vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
@@ -240,7 +241,6 @@
                     if(title == "Deleted video" || title == "Private video")
                     {
                       var prevTitle = onclickData[resp.result.items[i].snippet.position-1].title;
-                      document.getElementById('unavailable').appendChild(document.createElement(br));
                       document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
                       unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
                       unavailableCounter++;
