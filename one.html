@@ -80,7 +80,7 @@
     <br>
     <div id="content"></div>
     <br>
-    <div style= "display:none" id="unavailable"></div>
+    <div id="unavail" style= "display:none" ></div>
     <button id = "togg"onclick="showLost()">Deleted</button>
     <script type="text/javascript">
       //store api response data
@@ -197,8 +197,6 @@
                 //console.log(resp.result.items[i].snippet);
                 if(title == "Deleted video" || title == "Private video")
                     {
-                      var prevTitle = onclickData[resp.result.items[i].snippet.position-1].title;
-                      document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
                       unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
                       unavailableCounter++;
                       continue;
@@ -206,11 +204,8 @@
                 vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
-                onclickData[resp.result.items[i].snippet.position] = 
-                    {
-                      id : resp.result.items[i].snippet.resourceId.videoId,
-                      title : title
-                    };                img.setAttribute("src", thumbnail); 
+                onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId;
+                img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
                 text.innerHTML = title;
@@ -240,8 +235,6 @@
                     console.log(resp.result.items[i].snippet);
                     if(title == "Deleted video" || title == "Private video")
                     {
-                      var prevTitle = onclickData[resp.result.items[i].snippet.position-1].title;
-                      document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
                       unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
                       unavailableCounter++;
                       continue;
@@ -249,11 +242,8 @@
                     vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+",this);");
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
-                    onclickData[resp.result.items[i].snippet.position] = 
-                    {
-                      id : resp.result.items[i].snippet.resourceId.videoId,
-                      title : title
-                    };
+                    onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId;
+
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
@@ -283,6 +273,10 @@
       }
       function showLost()
       {
+        for(var i = 0; i < unavailable.length; i++)
+        {
+          document.getElementById("unavail").innerHTML += unavailable[i] + "<br>";
+        }
         document.getElementById("unavail").style.display = "block";
         document.getElementById("togg").innerHTML = "hide";
         document.getElementById("togg").onclick = "hideLost()";
