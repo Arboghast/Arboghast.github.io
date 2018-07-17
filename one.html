@@ -282,7 +282,7 @@
         }
         document.getElementById("unavail").style.display = "block";
         document.getElementById("togg").innerHTML = "hide";
-        document.getElementById("togg").onclick = "hideLost()";
+        document.getElementById("togg").setAttribute(onclick, "hideLost()");
       }
       function hideLost()
       {
