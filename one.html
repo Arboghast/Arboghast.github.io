@@ -283,9 +283,10 @@
       }
       function hideLost()
       {
+        document.getElementById("unavail").innerHTML = "";
         document.getElementById("unavail").style.display = "none";
         document.getElementById("togg").innerHTML = "show";
-        document.getElementById("togg").onclick = "showLost()";
+        document.getElementById("togg").setAttribute(onclick, "showLost()");
       }
       function clearUnavail()
       {
