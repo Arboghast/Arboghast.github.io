@@ -80,12 +80,8 @@
     <br>
     <div id="content"></div>
     <br>
-    <div id="deleted">0</div>
-    <br>
-    <div id="private">0</div>
-    <button onclick="showDeleted()">Deleted</button>
-    <button onclick="showPrivate()">Private</button>
-
+    <div id = "unavail" style= "display:none" id="unavailable">0</div>
+    <button id = "togg"onclick="showLost()">Deleted</button>
     <script type="text/javascript">
       //store api response data
       var queueCounter = 0;
@@ -93,8 +89,8 @@
       var onclickData = [];
       var datas = {};
       var id = [];
-      var deleted = [];
-      var private = [];
+      var unavailable = [];
+      var unavailableCounter = 0;
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
       var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
@@ -199,21 +195,21 @@
                 vid.setAttribute("class", "vidTemplate");
                 var title = resp.result.items[i].snippet.title;
                 //console.log(resp.result.items[i].snippet);
-                if(title == "Deleted video")
-                  {
-                    document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
-                    continue;
-                  }
-                if(title == "Private video")
-                {
-                    document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
-                    continue;
-                }
+                if(title == "Deleted video" || title == "Private video")
+                    {
+                      var prevTitle = onclickData[resp.result.items[i].snippet.position].title;
+                      document.getElementById('unavailable').appendChild(document.createElement(br));
+                      document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
+                      continue;
+                    }
                 vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
-                onclickData[resp.result.items[i].snippet.position] =resp.result.items[i].snippet.resourceId.videoId;
-                img.setAttribute("src", thumbnail); 
+                onclickData[resp.result.items[i].snippet.position] = 
+                    {
+                      id : resp.result.items[i].snippet.resourceId.videoId,
+                      title : title
+                    };                img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
                 text.innerHTML = title;
@@ -240,21 +236,24 @@
                     var vid = document.createElement("p");
                     vid.setAttribute("class", "vidTemplate");
                     var title = resp.result.items[i].snippet.title;
-                    console.log(resp.result.items[i].snippet);
-                    if(title == "Deleted video")
+                    ///console.log(resp.result.items[i].snippet);
+                    if(title == "Deleted video" || title == "Private video")
                     {
-                      document.getElementById('deleted').innerHTML = document.getElementById('deleted').innerHTML+1;
-                      continue;
-                    }
-                    if(title == "Private video")
-                    {
-                      document.getElementById('private').innerHTML = document.getElementById('private').innerHTML+1;
+                      var prevTitle = onclickData[resp.result.items[i].snippet.position].title;
+                      document.getElementById('unavailable').appendChild(document.createElement(br));
+                      document.getElementById('unavailable').innerHTML += "Previous video's title is " + prevTitle;
+                      unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
+                      unavailableCounter++;
                       continue;
                     }
                     vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+",this);");
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
-                    onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId,
+                    onclickData[resp.result.items[i].snippet.position] = 
+                    {
+                      id : resp.result.items[i].snippet.resourceId.videoId,
+                      title : title
+                    };
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
@@ -282,13 +281,22 @@
         queue = [];
         queueCounter =0;
       }
-      function showDeleted()
+      function showLost()
       {
-
+        document.getElementById("unavail").style.display = "block";
+        document.getElementById("togg").innerHTML = "hide";
+        document.getElementById("togg").onclick = "hideLost()";
       }
-      function showPrivate()
+      function hideLost()
       {
-
+        document.getElementById("unavail").style.display = "none";
+        document.getElementById("togg").innerHTML = "show";
+        document.getElementById("togg").onclick = "showLost()";
+      }
+      function clearUnavail()
+      {
+        unavailable = [];
+        unavailableCounter = 0;
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
