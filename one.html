@@ -81,6 +81,9 @@
     <div id="content"></div>
     <br>
     <div id="unavail" style= "display:none;" ></div>
+    <br>
+    <div id = "queue" style = "display:none;"></div>
+    <button id = "togg2" onclick = "showQueue()">Show queue</button>
     <button id = "togg"onclick="showLost()">Missing</button>
     <script type="text/javascript">
       //store api response data
@@ -287,6 +290,23 @@
         document.getElementById("unavail").style.display = "none";
         document.getElementById("togg").innerHTML = "show";
         document.getElementById("togg").setAttribute(onclick, "showLost()");
+      }
+      function showQueue()
+      {
+        for(var i = queueCounter; i >= 0; i--)
+        {
+          document.getElementById("queue").innerHTML += queue[i].html + "<br>";
+        }
+        document.getElementById("queue").style.display = "block";
+        document.getElementById("togg2").innerHTML = "hide queue";
+        document.getElementById("togg2").setAttribute(onclick, "hideQueue()");
+      }
+      function hideQueue()
+      {
+        document.getElementById("queue").innerHTML = "";
+        document.getElementById("queue").style.display = "block";
+        document.getElementById("togg2").innerHTML = "show queue";
+        document.getElementById("togg2").setAttribute(onclick, "showQueue()");
       }
       function clearUnavail()
       {
