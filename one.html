@@ -83,6 +83,8 @@
     <div id="deleted">0</div>
     <br>
     <div id="private">0</div>
+    <button onclick="showDeleted()">Deleted</button>
+    <button onclick="showPrivate()">Private</button>
 
     <script type="text/javascript">
       //store api response data
@@ -91,6 +93,8 @@
       var onclickData = [];
       var datas = {};
       var id = [];
+      var deleted = [];
+      var private = [];
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
       var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
@@ -277,6 +281,14 @@
       {
         queue = [];
         queueCounter =0;
+      }
+      function showDeleted()
+      {
+
+      }
+      function showPrivate()
+      {
+
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
