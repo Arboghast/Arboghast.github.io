@@ -322,8 +322,7 @@
         {
           console.log(i);
           var html = queue[i].html;
-          html.setAttribute(onclick, "download()");
-          document.getElementById("queue").innerHTML += html + "<br>";
+          document.getElementById("queue").appendChild(html);
         }
         document.getElementById("queue").style.display = "block";
         document.getElementById("togg2").innerHTML = "hide queue";
@@ -347,7 +346,7 @@
       }
       function removeFromQueue()
       {
-        
+
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
