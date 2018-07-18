@@ -325,6 +325,7 @@
         }
         document.getElementById("queue").style.display = "block";
         document.getElementById("togg2").innerHTML = "hide queue";
+        document.getElementById("togg2").removeAttribute(onclick);
         document.getElementById("togg2").setAttribute(onclick, "hideQueue()");
       }
       function hideQueue()
