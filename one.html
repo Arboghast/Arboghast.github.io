@@ -207,7 +207,13 @@
                 vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
                 var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                 var img = document.createElement("img");
-                onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId;
+                onclickData[resp.result.items[i].snippet.position] = 
+                {
+                      
+                  id : resp.result.items[i].snippet.resourceId.videoId,
+                  title : title,
+                  thumb: thumbnail
+                };               
                 img.setAttribute("src", thumbnail); 
                 img.setAttribute("class", "video");
                 var text = document.createElement("center");
@@ -245,8 +251,13 @@
                     vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+",this);");
                     var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                     var img = document.createElement("img");
-                    onclickData[resp.result.items[i].snippet.position] = resp.result.items[i].snippet.resourceId.videoId;
-
+                    onclickData[resp.result.items[i].snippet.position] = 
+                    {
+                      
+                      id : resp.result.items[i].snippet.resourceId.videoId,
+                      title : title,
+                      thumb: thumbnail
+                    };
                     img.setAttribute("src", thumbnail);
                     img.setAttribute("class", "video"); 
                     var text = document.createElement("center");
@@ -263,9 +274,23 @@
       }
       function addToQueue(scraps,theHtml)
       {
+        var datas =  onclickData[scraps];
+
+        var vid = document.createElement("p");
+        vid.setAttribute("class", "vidTemplate");
+        vid.setAttribute("onclick","download();removeFromQueue();");
+        var img = document.createElement("img");
+        img.setAttribute("src", datas.thumb);
+        img.setAttribute("class", "video"); 
+        var text = document.createElement("center");
+        text.innerHTML = datas.title;
+        text.setAttribute("class", "title");
+        vid.appendChild(img);
+        vid.appendChild(text);
+
         queue[queueCounter] = {
-          data : onclickData[scraps],
-          html : theHtml
+          id : datas.id,
+          html : vid
         }
         queueCounter++;
       }
@@ -315,6 +340,14 @@
       {
         unavailable = [];
         unavailableCounter = 0;
+      }
+      function download()
+      {
+
+      }
+      function removeFromQueue()
+      {
+        
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
