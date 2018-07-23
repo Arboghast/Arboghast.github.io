@@ -318,16 +318,16 @@
       }
       function showQueue()
       {
-        document.getElementById("queue").innerHTML = "";
         for(var i = queueCounter-1; i >= 0; i--)
         {
           var html = queue[i].html;
           document.getElementById("queue").appendChild(html);
         }
         document.getElementById("queue").style.display = "block";
-        document.getElementById("togg2").innerHTML = "hide queue";
-        document.getElementById("togg2").removeAttribute(onclick);
-        document.getElementById("togg2").setAttribute(onclick, "hideQueue()");
+        document.getElementById("togg2").innerHTML = "hide queue"; 
+        document.getElementById("togg2").onclick = "hideQueue();";
+       /* document.getElementById("togg2").removeAttribute(onclick);
+        document.getElementById("togg2").setAttribute(onclick, "hideQueue()");*/
       }
       function hideQueue()
       {
