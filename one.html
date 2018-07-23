@@ -328,16 +328,12 @@
         console.log( document.getElementById("togg2").onclick);
         document.getElementById("togg2").onclick = function onclick(event) { hideQueue(); };
         console.log( document.getElementById("togg2").onclick);
-
-       /* document.getElementById("togg2").removeAttribute(onclick);
-        document.getElementById("togg2").setAttribute(onclick, "hideQueue()");*/
       }
       function hideQueue()
       {
         document.getElementById("queue").style.display = "block";
         document.getElementById("togg2").innerHTML = "show queue";
-        document.getElementById("togg2").removeAttribute(onclick);
-        document.getElementById("togg2").setAttribute(onclick, "showQueue()");
+        document.getElementById("togg2").onclick = function onclick(event) { showQueue(); };
       }
       function clearUnavail()
       {
