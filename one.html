@@ -307,14 +307,14 @@
         }
         document.getElementById("unavail").style.display = "block";
         document.getElementById("togg").innerHTML = "hide";
-        document.getElementById("togg").setAttribute(onclick, "hideLost()");
+        document.getElementById("togg").onclick = function onclick(event) { hideLost(); };
       }
       function hideLost()
       {
         document.getElementById("unavail").innerHTML = "";
         document.getElementById("unavail").style.display = "none";
         document.getElementById("togg").innerHTML = "show";
-        document.getElementById("togg").setAttribute(onclick, "showLost()");
+        document.getElementById("togg").onclick = function onclick(event) { showLost(); };
       }
       function showQueue()
       {
