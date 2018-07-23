@@ -278,7 +278,7 @@
 
         var vid = document.createElement("p");
         vid.setAttribute("class", "vidTemplate");
-        vid.setAttribute("onclick","download();removeFromQueue();");
+        vid.setAttribute("onclick","download("+datas.id+");removeFromQueue();");
         var img = document.createElement("img");
         img.setAttribute("src", datas.thumb);
         img.setAttribute("class", "video"); 
