@@ -39,7 +39,7 @@ var apiKey = 'AIzaSyCw-tiI-qvlc5_4pCVjfaNXm-1_a9G2-N0';
      authorizeButton.style.display = 'none';
      mes.style.display = 'none';
      signoutButton.style.display = 'block';
-     makeApiCall();
+     getPlaylistNames();
    } else {
      document.getElementById('playlistNames').innerHTML = '';
      document.getElementById('content').innerHTML = '';
