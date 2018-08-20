@@ -1,0 +1,32 @@
+<!--DOCTYPE HTML-->
+<style  type="text/css" src="style.css"></style>
+<script type="text/javascript" src="gears.js"></script>
+<!-- The Youtube Playlist Downloader-->
+<html>
+  <head> 
+    <title>Youtube Playlist Downloader</title>
+    <meta charset='utf-8' />
+  </head>
+  <body> <!--page content-->
+    <h1><center>UCmr0x7IcPKCeT1XfQmy0PBg</center></h1>
+    <p><center id = "message" style = "display: none;"> sit amet, consectetur adipiscing elit. Vivamus ac justo erat.</center></p>
+    
+    <!--buttons to initiate auth sequence and sign out-->
+    <center><button id="authorize-button"  style="display: none;" onclick = "handleAuthClick()">Authorize</button></center>
+    <center><button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button></center>
+    <br>
+    <div id="playlistNames"></div> <!--tiles to select playlist-->
+    <br>
+    <div id="content"></div> <!-- tiles displaying a playlists` videos -->
+    <br>
+    <div id="unavail" style= "display:none;" ></div> <!--tiles displaying playlists unavailavble videos-->
+    <br>
+    <div id = "queue" style = "display:none;"></div> <!-- tiles showing current videos in queue-->
+
+    <!-- toggle show and hide queue & show and hide unavailable vids-->
+    <button id = "togg2" onclick = "showQueue()">Show queue</button>
+    <button id = "togg"onclick="showLost()">Missing</button>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+  </body>
+</html>

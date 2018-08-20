@@ -1,0 +1,45 @@
+#playlistNames
+  {
+    width: 90%;
+    height: 10%;
+    position: static;
+    margin: 0 auto;
+  }
+  .playlistText
+  {
+    height: 30px;
+    width: 19.5%;
+    position: relative;
+    border: 1px ridge black;
+    float:left; 
+    text-align: center;
+  }
+  .vidTemplate
+  {
+    width: 22%;
+    height: 90px;
+    position: static;
+    float: left;
+    padding-right: 2%;
+    cursor: pointer;
+    background-color: blueviolet;
+  }
+  .video
+  {
+    display: block;
+    float:left;
+    position:static;
+  }
+  .title
+  {
+    text-overflow:ellipsis;
+    display: inline;
+    position: static;
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+  #content
+  {
+    margin-left: 3.5%;
+  }
