@@ -35,6 +35,7 @@
    });
  }
 
+ //lots of abstraction can be done to these next 2 functions
  function getPlaylistVideos(index){ 
      gapi.client.youtube.playlistItems.list({
        'part' : 'snippet,contentDetails',
@@ -50,7 +51,7 @@
            vid.setAttribute("class", "vidTemplate");
            var title = resp.result.items[i].snippet.title;
            //console.log(resp.result.items[i].snippet);
-           if(title == "Deleted video" || title == "Private video")
+           if(title == "Deleted video" || title == "Private video") //for preventing errors in code, api response for deleted and private videos are different than normal
                {
                  unavailable[unavailableCounter] = resp.result.items[i].snippet.position;
                  unavailableCounter++;
@@ -59,7 +60,7 @@
            vid.setAttribute("onclick","addToQueue("+ resp.result.items[i].snippet.position +",this);");
            var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
            var img = document.createElement("img");
-           onclickData[resp.result.items[i].snippet.position] = 
+           onclickData[resp.result.items[i].snippet.position] = //store this videos api data(basically cache it so that it can be reused)
            {
                  
              id : resp.result.items[i].snippet.resourceId.videoId,
@@ -106,7 +107,7 @@
                vid.setAttribute("onclick","addToQueue("+resp.result.items[i].snippet.position+",this);");
                var thumbnail = resp.result.items[i].snippet.thumbnails.default.url
                var img = document.createElement("img");
-               onclickData[resp.result.items[i].snippet.position] = 
+               onclickData[resp.result.items[i].snippet.position] =  //store this videos api data(basically cache it so that it can be reused)
                {
                  
                  id : resp.result.items[i].snippet.resourceId.videoId,
@@ -131,13 +132,13 @@
          });
  }
  
- function addToQueue(scraps,theHtml)
+ function addToQueue(scraps,theHtml) //scraps = the position of the video being clicked on in the onclick array(cached resources)
  {
    var datas =  onclickData[scraps];
 
    var vid = document.createElement("p");
    vid.setAttribute("class", "vidTemplate");
-   vid.setAttribute("onclick","download("+datas.id+");removeFromQueue();");
+   vid.setAttribute("onclick","download("+datas.id+");removeFromQueue();"); //unstarted download function, placeholder for now
    var img = document.createElement("img");
    img.setAttribute("src", datas.thumb);
    img.setAttribute("class", "video"); 
@@ -146,8 +147,9 @@
    text.setAttribute("class", "title");
    vid.appendChild(img);
    vid.appendChild(text);
+   //again can be simplified with tilda technique
 
-   queue[queueCounter] = {
+   queue[queueCounter] = { //cached resources being moved over to new array to be cached longer, until user wipes queue. onclick cache array resets after every new playlist click. moving to new array allows to save the necessary data.
      id : datas.id,
      html : vid
    }
@@ -158,7 +160,7 @@
    queue = [];
    queueCounter =0;
  }
- function showLost()
+ function showLost() //toggle unavailable videos, showld probably change name , lost videos are videos that are either deleted or turned private, both making the video inaccesible to the user.
  {
    for(var i = 0; i < unavailable.length; i++)
    {
@@ -175,7 +177,7 @@
    document.getElementById("togg").innerHTML = "show";
    document.getElementById("togg").onclick = function onclick(event) { showLost(); };
  }
- function showQueue()
+ function showQueue() //toggles between queue
  {
    for(var i = queueCounter-1; i >= 0; i--)
    {
