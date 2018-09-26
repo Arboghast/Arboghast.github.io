@@ -174,7 +174,7 @@
  {
    document.getElementById("unavail").innerHTML = "";
    document.getElementById("unavail").style.display = "none";
-   document.getElementById("togg").innerHTML = "show";
+   document.getElementById("togg").innerHTML = "missing";
    document.getElementById("togg").onclick = function onclick(event) { showLost(); };
  }
  function showQueue() //toggles between queue
