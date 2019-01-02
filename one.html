@@ -111,8 +111,9 @@
     <center><button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button></center>
     <br>
     <div id="playlistNames"></div>
-    <button id = "togg2" onclick = "showQueue()">Show Queue</button>
-    <button id = "togg"onclick="showLost()">Show Missing</button>
+    <br>
+    <button id = "togg2" style= "display:none;" onclick = "showQueue()">Show Queue</button>
+    <button id = "togg"style= "display:none;" onclick="showLost()">Show Missing</button>
     <br>
     <div id="unavail" style= "display:none;" ></div>
     <br>
@@ -176,10 +177,14 @@
           authorizeButton.style.display = 'none';
           mes.style.display = 'none';
           signoutButton.style.display = 'block';
+          document.getElementById("togg2").style.display = 'block';
+          document.getElementById("togg").style.display = 'block';
           makeApiCall();
         } else {
           document.getElementById('playlistNames').innerHTML = '';
           document.getElementById('content').innerHTML = '';
+          document.getElementById("togg2").style.display = 'none';
+          document.getElementById("togg").style.display = 'none';
           mes.style.display = 'block';
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
