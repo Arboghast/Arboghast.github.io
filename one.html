@@ -88,13 +88,9 @@
     <button id = "togg2" onclick = "showQueue()">Show Queue</button>
     <button id = "togg"onclick="showLost()">Show Missing</button>
     <br>
-    <div id="unavail" style= "display:none;" >
-    </div>
+    <div id="unavail" style= "display:none;" ></div>
     <br>
-    <div id = "queue" style = "display:none;">
-      <button onclick="">Clear Queue</button>
-      <button onclick="">Create Playlist</button>
-    </div>
+    <div id = "queue" style = "display:none;"></div>
     <br>
     <div id="content"></div>
     
@@ -339,6 +335,18 @@
           var html = queue[i].html;
           document.getElementById("queue").appendChild(html);
         }
+        var button = document.createElement("button");
+        button.value = "Clear Queue";
+        button.setAttribute("onclick", "clearqueue()");
+        button.setAttribute("class", "button");
+        document.getElementById("queue").appendChild(button);
+
+        var button1 = document.createElement("button");
+        button1.value = "Create Playlist";
+        button1.setAttribute("onclick", "createplaylist()");
+        button1.setAttribute("class", "button");
+        document.getElementById("queue").appendChild(button1);
+ 
         document.getElementById("queue").style.display = "block";
         document.getElementById("togg2").innerHTML = "Hide Queue"; 
         document.getElementById("togg2").onclick = function onclick(event) { hideQueue(); };
