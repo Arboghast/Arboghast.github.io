@@ -312,6 +312,7 @@
       {
         queue = [];
         queueCounter =0;
+        document.getElementById("queue").innerHTML = '';
       }
       function showLost()
       {
@@ -364,13 +365,13 @@
         }
         var button = document.createElement("button");
         button.innerHTML = "Clear Queue";
-        button.setAttribute("onclick", "clearqueue()");
+        button.setAttribute("onclick", "clearQueue()");
         button.setAttribute("class", "button");
         document.getElementById("queue").appendChild(button);
 
         var button1 = document.createElement("button");
         button1.innerHTML = "Create Playlist";
-        button1.setAttribute("onclick", "createplaylist()");
+        button1.setAttribute("onclick", "createPlaylist()");
         button1.setAttribute("class", "button");
         document.getElementById("queue").appendChild(button1);
  
