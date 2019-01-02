@@ -314,7 +314,8 @@
         for(var i = 0; i < unavailable.length; i++)
         {
           let num = unavailable[i];
-          document.getElementById("unavail").innerHTML += num + " inbetween: "
+          document.getElementById("unavail").innerHTML 
+          += "Song number " + num + ", inbetween: "
           + onclickData[findPreviousIndex(num)].title + " and "
           + onclickData[findNextIndex(num)].title
           + "<br>";
