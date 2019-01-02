@@ -85,8 +85,8 @@
     <center><button id="signout-button" style="display: none;" onclick = "handleSignoutClick()">Sign Out</button></center>
     <br>
     <div id="playlistNames"></div>
-    <button id = "togg2" onclick = "showQueue()">Show queue</button>
-    <button id = "togg"onclick="showLost()">Missing</button>
+    <button id = "togg2" onclick = "showQueue()">Show Queue</button>
+    <button id = "togg"onclick="showLost()">Show Missing</button>
     <br>
     <div id="unavail" style= "display:none;" ></div>
     <br>
@@ -315,14 +315,14 @@
           document.getElementById("unavail").innerHTML += unavailable[i] + "<br>";
         }
         document.getElementById("unavail").style.display = "block";
-        document.getElementById("togg").innerHTML = "hide";
+        document.getElementById("togg").innerHTML = "Hide Missing";
         document.getElementById("togg").onclick = function onclick(event) { hideLost(); };
       }
       function hideLost()
       {
         document.getElementById("unavail").innerHTML = "";
         document.getElementById("unavail").style.display = "none";
-        document.getElementById("togg").innerHTML = "show";
+        document.getElementById("togg").innerHTML = "Show Missing";
         document.getElementById("togg").onclick = function onclick(event) { showLost(); };
       }
       function showQueue()
@@ -333,14 +333,14 @@
           document.getElementById("queue").appendChild(html);
         }
         document.getElementById("queue").style.display = "block";
-        document.getElementById("togg2").innerHTML = "hide queue"; 
+        document.getElementById("togg2").innerHTML = "Hide Queue"; 
         document.getElementById("togg2").onclick = function onclick(event) { hideQueue(); };
       }
       function hideQueue()
       {
         document.getElementById("queue").innerHTML = "";
-        document.getElementById("queue").style.display = "block";
-        document.getElementById("togg2").innerHTML = "show queue";
+        document.getElementById("queue").style.display = "none";
+        document.getElementById("togg2").innerHTML = "Show Queue";
         document.getElementById("togg2").onclick = function onclick(event) { showQueue(); };
       }
       function clearUnavail()
