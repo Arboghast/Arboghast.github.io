@@ -313,13 +313,35 @@
       {
         for(var i = 0; i < unavailable.length; i++)
         {
-          document.getElementById("unavail").innerHTML += unavailable[i] + " inbetween: " + 
-        //  onclickData[unavailable[i]-1].title + " and " + onclickData[unavailable[i]+1].title
-           + "<br>";
+          let num = unavailable[i];
+          document.getElementById("unavail").innerHTML += num + " inbetween: "
+          + onclickData[findPreviousIndex(num)].title + " and "
+          + onclickData[findNextIndex(num)].title
+          + "<br>";
         }
         document.getElementById("unavail").style.display = "block";
         document.getElementById("togg").innerHTML = "Hide Missing";
         document.getElementById("togg").onclick = function onclick(event) { hideLost(); };
+      }
+      function findPreviousIndex(num)
+      {
+        for(let x = num; x >=0; x--)
+        {
+          if(onclickData[x] == null)
+            continue;
+          else
+            return x;
+        }
+      }
+      function findNextIndex(num)
+      {
+        for(let x = num; x <onclickData.length; x++)
+        {
+          if(onclickData[x] == null)
+            continue;
+          else
+            return x;
+        }
       }
       function hideLost()
       {
