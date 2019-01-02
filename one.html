@@ -358,13 +358,13 @@
           document.getElementById("queue").appendChild(html);
         }
         var button = document.createElement("button");
-        button.value = "Clear Queue";
+        button.innerHTML = "Clear Queue";
         button.setAttribute("onclick", "clearqueue()");
         button.setAttribute("class", "button");
         document.getElementById("queue").appendChild(button);
 
         var button1 = document.createElement("button");
-        button1.value = "Create Playlist";
+        button1.innerHTML = "Create Playlist";
         button1.setAttribute("onclick", "createplaylist()");
         button1.setAttribute("class", "button");
         document.getElementById("queue").appendChild(button1);
