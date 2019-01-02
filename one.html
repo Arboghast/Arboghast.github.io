@@ -273,6 +273,7 @@
               if(resp.result.hasOwnProperty("nextPageToken")) {
                 makeApiCallVideo2(index,resp.result.nextPageToken);
               }
+              checkScroll();
           });
       }
       function makeApiCallVideo2(index,nextPageToken) { //recursive next step for makeapicallvideo()
@@ -317,6 +318,7 @@
                   if(resp.result.hasOwnProperty("nextPageToken")) {
                         makeApiCallVideo2(index,resp.result.nextPageToken);
                   }
+                  checkScroll();
               });
       }
       function addToQueue(scraps,theHtml)
@@ -418,6 +420,17 @@
         document.getElementById("queue").style.display = "none";
         document.getElementById("togg2").innerHTML = "Show Queue";
         document.getElementById("togg2").onclick = function onclick(event) { showQueue(); };
+      }
+      function checkScroll()
+      {
+        if(document.body.scrollHeight > document.body.clientHeight) //checks for vertical scroll bar
+        {
+          body.style["background-size"] = "100% 100%";  //for css properties with hyphens in it
+        }
+        else
+        {
+          body.style["background-style"] = "cover";
+        }
       }
       function clearUnavail()
       {
