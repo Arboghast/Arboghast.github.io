@@ -425,11 +425,11 @@
       {
         if(document.body.scrollHeight > document.body.clientHeight) //checks for vertical scroll bar
         {
-          body.style["background-size"] = "100% 100%";  //for css properties with hyphens in it
+          document.body.style["background-size"] = "100% 100%";  //for css properties with hyphens in it
         }
         else
         {
-          body.style["background-style"] = "cover";
+          document.body.style["background-style"] = "cover";
         }
       }
       function clearUnavail()
