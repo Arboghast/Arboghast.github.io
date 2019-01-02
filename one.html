@@ -106,10 +106,9 @@
   body
   {
     background: url(src/gradient2.png);
-    background-size: cover;
   }
   </style>
-  <body>
+  <body onload="checkScroll()">
     <h1><center>Youtube Playlist Viewer</center></h1>
     <p><center id = "message" style = "display: none;"> Please sign in to continue. </center></p>
     <!--Add buttons to initiate auth sequence and sign out-->
