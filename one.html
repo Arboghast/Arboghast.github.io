@@ -67,7 +67,6 @@
   {
     margin-left: 3%;
     margin-right: 3%;
-    border: 1px ridge blue;
   }
   </style>
   <body>
@@ -79,13 +78,15 @@
     <br>
     <div id="playlistNames"></div>
     <br>
-    <div id="content"></div>
+    <button id = "togg2" onclick = "showQueue()">Show queue</button>
+    <button id = "togg"onclick="showLost()">Missing</button>
     <br>
     <div id="unavail" style= "display:none;" ></div>
     <br>
     <div id = "queue" style = "display:none;"></div>
-    <button id = "togg2" onclick = "showQueue()">Show queue</button>
-    <button id = "togg"onclick="showLost()">Missing</button>
+    <br>
+    <div id="content"></div>
+    
     <script type="text/javascript">
       //store api response data
       var queueCounter = 0;
